@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/residents")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://vehicle-pooling-ledger-frontend.vercel.app")
 public class ResidentController {
 
     @Autowired
