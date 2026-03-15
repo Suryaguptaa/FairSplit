@@ -11,6 +11,17 @@ A full-stack web application for apartment society residents to track shared cab
 ![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)
 
 ---
+## Demo Access
+
+A demo account is available to explore the app without registering:
+
+| Field | Value |
+|---|---|
+| Email | demo@poolledger.com |
+| Password | demo1234 |
+
+Or register your own account at the live demo link.
+---
 
 ## Screenshots
 
@@ -27,7 +38,8 @@ A full-stack web application for apartment society residents to track shared cab
 ![Stats](screenshots/stats.png)
 
 ---
-
+> Backend only, a minimal React frontend is currently in progress.
+---
 ## What it does
 
 Residents of a gated society form commute groups. When someone pays for a shared cab, they log the ride, the system splits the fare equally, updates everyone's balance, and tracks who owes whom. At month end, the group settles up offline and resets all balances with one click.
@@ -43,7 +55,8 @@ Residents of a gated society form commute groups. When someone pays for a shared
 - Stats page with spending charts per person and per group
 - One-click group settle that resets all balances to zero
 - `@Transactional` ensures balance updates never leave the database in a partial state
-
+- **JWT Authentication** — residents register and login with email and password
+- **Invite Code** — each group has a unique 6-character code, residents join by entering the code
 ---
 
 ## Tech Stack
