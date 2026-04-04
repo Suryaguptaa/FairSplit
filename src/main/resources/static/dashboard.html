@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairSplit | Analytics</title>
+    <link rel="stylesheet" href="css/styles.css">
+<script>if(localStorage.getItem('theme')==='dark') document.documentElement.setAttribute('data-theme', 'dark');</script>
+</head>
+<body>
+    <div class="main-content">
+        <div style="margin-bottom: 2rem;">
+            <h2>Analytics Dashboard</h2>
+            <p class="text-muted" style="margin-top: 0.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                Current Financial Year
+            </p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Top 4 Stats -->
+            <div class="card metric-card col-span-3">
+                <div class="metric-header">
+                    <div>
+                        <p class="metric-label">Total You Owe</p>
+                    </div>
+                    <div class="metric-icon" style="background: var(--danger-bg); color: var(--danger);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="totalOwe" class="metric-value">₹0.00</h2>
+                    <span class="metric-trend" style="background: var(--hover-bg); color: var(--text-muted);">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                        Outstanding
+                    </span>
+                </div>
+            </div>
+
+            <div class="card metric-card col-span-3">
+                <div class="metric-header">
+                    <div>
+                        <p class="metric-label">Total You Are Owed</p>
+                    </div>
+                    <div class="metric-icon" style="background: var(--success-bg); color: var(--success);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="totalOwed" class="metric-value">₹0.00</h2>
+                    <span class="metric-trend" style="background: var(--success-bg); color: var(--success);">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                        Receivable
+                    </span>
+                </div>
+            </div>
+
+            <div class="card metric-card col-span-3">
+                <div class="metric-header">
+                    <div>
+                        <p class="metric-label">Active Groups</p>
+                    </div>
+                    <div class="metric-icon" style="background: var(--primary-light); color: var(--primary);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="statGroups" class="metric-value">0</h2>
+                    <span class="metric-trend" style="background: var(--hover-bg); color: var(--text-muted);">Since joining</span>
+                </div>
+            </div>
+
+            <div class="card metric-card col-span-3">
+                <div class="metric-header">
+                    <div>
+                        <p class="metric-label">Total Expenses</p>
+                    </div>
+                    <div class="metric-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="statExpenses" class="metric-value">0</h2>
+                    <span class="metric-trend" style="background: var(--hover-bg); color: var(--text-muted);">Recorded transactions</span>
+                </div>
+            </div>
+
+            <!-- Middle Row -->
+            <div class="card col-span-8">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Expense Dynamics</h3>
+                    <select style="padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text-main); font-size: 0.85rem;">
+                        <option>2026</option>
+                    </select>
+                </div>
+                
+                <!-- Simulated CSS Chart to look highly professional -->
+                <div class="css-chart" id="simulatedChart">
+                    <div class="chart-bar" style="height: 30%"></div>
+                    <div class="chart-bar" style="height: 50%"></div>
+                    <div class="chart-bar" style="height: 40%"></div>
+                    <div class="chart-bar" style="height: 70%"></div>
+                    <div class="chart-bar" style="height: 60%"></div>
+                    <div class="chart-bar" style="height: 90%"></div>
+                    <div class="chart-bar" style="height: 45%"></div>
+                    <div class="chart-bar" style="height: 65%"></div>
+                    <div class="chart-bar" style="height: 80%"></div>
+                    <div class="chart-bar" style="height: 55%"></div>
+                    <div class="chart-bar" style="height: 35%"></div>
+                    <div class="chart-bar" style="height: 50%"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">
+                    <span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span>
+                    <span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Recent Transactions</h3>
+                <div id="loadingActivity" style="text-align: center; padding: 2rem 0;">
+                    <p class="text-muted">Loading analytics...</p>
+                </div>
+                <table class="data-table" id="recentActivityTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Expense Title</th>
+                            <th>Group</th>
+                            <th>Date</th>
+                            <th style="text-align: right;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentActivity"></tbody>
+                </table>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-span-4" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div class="card" style="background: var(--primary); color: white; border: none; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h3 style="color: white; font-weight: 600;">Setup Actions</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5;">
+                        Optimize your FairSplit workflow. Create groups, invite your peers, and start tracking intelligent analytics.
+                    </p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: auto;">
+                        <button onclick="navigateTo('groups.html')" class="btn" style="width: 100%; justify-content: flex-start; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-weight: 500;">
+                            <span style="width: 24px; height: 24px; background: white; color: var(--primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.5rem; font-size: 1rem; font-weight: bold;">+</span>
+                            Create a New Group
+                        </button>
+                        <button onclick="navigateTo('groups.html')" class="btn" style="width: 100%; justify-content: flex-start; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-weight: 500;">
+                            <span style="width: 24px; height: 24px; background: white; color: var(--primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.5rem; font-size: 1rem; font-weight: bold;">→</span>
+                            Join Existing Group
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="font-weight: 600;">Top Categories</h3>
+                        <div style="background: var(--input-bg); padding: 0.3rem; border-radius: 6px; color: var(--text-muted);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+                                <span>Software & IT</span>
+                                <span style="font-weight: 600;">₹1,250.00</span>
+                            </div>
+                            <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
+                                <div style="height: 100%; width: 65%; background: var(--primary); border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+                                <span>Housing</span>
+                                <span style="font-weight: 600;">₹800.00</span>
+                            </div>
+                            <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
+                                <div style="height: 100%; width: 45%; background: var(--success); border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+                                <span>Food & Dining</span>
+                                <span style="font-weight: 600;">₹500.50</span>
+                            </div>
+                            <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
+                                <div style="height: 100%; width: 25%; background: var(--danger); border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, var(--card) 0%, rgba(16, 185, 129, 0.05) 100%);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="font-weight: 600;">Pending Settlements</h3>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 0.3rem; border-radius: 6px; color: var(--success);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--input-bg); border-radius: 8px; border: 1px solid var(--border);">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">A</div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.85rem; font-weight: 600;">Alice Manager</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">owes you</div>
+                            </div>
+                            <div style="font-weight: 600; color: var(--success); font-size: 0.9rem;">₹516.83</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--input-bg); border-radius: 8px; border: 1px solid var(--border);">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">B</div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.85rem; font-weight: 600;">Bob Developer</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">owes you</div>
+                            </div>
+                            <div style="font-weight: 600; color: var(--success); font-size: 0.9rem;">₹491.83</div>
+                        </div>
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem;">Send Reminders</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="card col-span-12">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>Overall Balances</h3>
+                </div>
+                
+                <div id="loadingBalances" style="text-align: center; padding: 2rem 0;">
+                    <p class="text-muted">Calculating overall balances...</p>
+                </div>
+                <table class="data-table" id="balancesTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Group</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Pending Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="overallBalances"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        checkAuth();
+        renderSidebar('dashboard'); 
+
+        // Randomize chart slightly for effect
+        document.querySelectorAll('.chart-bar').forEach(bar => {
+            bar.style.height = Math.floor(Math.random() * 60 + 30) + '%';
+        });
+
+        async function loadDashboard() {
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('user'));
+                const groups = await apiFetch('/groups');
+                
+                document.getElementById('statGroups').textContent = groups.length;
+
+                if (groups.length === 0) {
+                    document.getElementById('loadingBalances').style.display = 'none';
+                    document.getElementById('loadingActivity').style.display = 'none';
+                    
+                    document.getElementById('overallBalances').innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-muted); padding: 2rem;">No groups joined yet.</td></tr>';
+                    document.getElementById('balancesTable').style.display = 'table';
+                    
+                    document.getElementById('recentActivity').innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-muted); padding: 2rem;">No analytics data available.</td></tr>';
+                    document.getElementById('recentActivityTable').style.display = 'table';
+                    return;
+                }
+
+                let totalOwe = 0;
+                let totalOwed = 0;
+                let allDebts = [];
+                let allExpenses = [];
+
+                const groupPromises = groups.map(async (g) => {
+                    const [debts, expenses] = await Promise.all([
+                        apiFetch(`/expenses/group/${g.id}/debts`),
+                        apiFetch(`/expenses/group/${g.id}`)
+                    ]);
+
+                    debts.forEach(d => {
+                        const isMePaying = d.from.id === currentUser.id;
+                        const isMeReceiving = d.to.id === currentUser.id;
+                        
+                        if (isMePaying) {
+                            totalOwe += d.amount;
+                            allDebts.push({ type: 'owe', name: d.to.name, amount: d.amount, groupName: g.name });
+                        } else if (isMeReceiving) {
+                            totalOwed += d.amount;
+                            allDebts.push({ type: 'owed', name: d.from.name, amount: d.amount, groupName: g.name });
+                        }
+                    });
+
+                    expenses.forEach(e => {
+                        const isPayer = e.paidBy.id === currentUser.id;
+                        const isSplit = e.splitBetween.some(u => u.id === currentUser.id);
+                        if (isPayer || isSplit) {
+                            allExpenses.push({ ...e, groupName: g.name });
+                        }
+                    });
+                });
+
+                await Promise.all(groupPromises);
+
+                document.getElementById('statExpenses').textContent = allExpenses.length;
+                document.getElementById('totalOwe').textContent = `₹${totalOwe.toFixed(2)}`;
+                document.getElementById('totalOwed').textContent = `₹${totalOwed.toFixed(2)}`;
+
+                // --- Render Balances ---
+                document.getElementById('loadingBalances').style.display = 'none';
+                document.getElementById('balancesTable').style.display = 'table';
+                const balContainer = document.getElementById('overallBalances');
+
+                if (allDebts.length === 0) {
+                    balContainer.innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--success); padding: 2rem; font-weight: 500;">✓ You are completely settled up!</td></tr>';
+                } else {
+                    balContainer.innerHTML = allDebts.map(d => {
+                        const isOwe = d.type === 'owe';
+                        const color = isOwe ? 'negative' : 'positive';
+                        const statusClass = isOwe ? 'background: var(--danger-bg); color: var(--danger);' : 'background: var(--success-bg); color: var(--success);';
+                        const statusText = isOwe ? 'You Owe' : 'Owes You';
+                        
+                        return `
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--hover-bg); display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                                            ${d.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <span style="font-weight: 500;">${d.name}</span>
+                                    </div>
+                                </td>
+                                <td><span style="color: var(--text-muted);">${d.groupName}</span></td>
+                                <td><span class="status-pill" style="${statusClass}">${statusText}</span></td>
+                                <td style="text-align: right;" class="amount ${color}">₹${d.amount.toFixed(2)}</td>
+                            </tr>
+                        `;
+                    }).join('');
+                }
+
+                // --- Render Recent Activity ---
+                document.getElementById('loadingActivity').style.display = 'none';
+                document.getElementById('recentActivityTable').style.display = 'table';
+                const actContainer = document.getElementById('recentActivity');
+                
+                allExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+                const topExpenses = allExpenses.slice(0, 6);
+
+                if (topExpenses.length === 0) {
+                    actContainer.innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-muted); padding: 2rem;">No recent transactions.</td></tr>';
+                } else {
+                    actContainer.innerHTML = topExpenses.map(e => {
+                        const date = new Date(e.date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+                        const isMe = e.paidBy.id === currentUser.id;
+                        
+                        return `
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 500;">${e.title}</div>
+                                            <div style="font-size: 0.8rem; color: var(--text-muted);">${isMe ? 'You' : e.paidBy.name} paid</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span style="color: var(--text-muted); font-size: 0.9rem;">${e.groupName}</span></td>
+                                <td><span style="color: var(--text-muted); font-size: 0.9rem;">${date}</span></td>
+                                <td style="text-align: right; font-weight: 600;">₹${e.amount.toFixed(2)}</td>
+                            </tr>
+                        `;
+                    }).join('');
+                }
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('loadingBalances').innerHTML = '<p class="text-danger">Failed to load analytics.</p>';
+                document.getElementById('loadingActivity').innerHTML = '';
+            }
+        }
+
+        loadDashboard();
+    </script>
+</body>
+</html>
